@@ -1,11 +1,8 @@
-# app/main.py
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from configs.db.mysql.mysql_config import Base, engine
-from domain.delivery.router import user_router
-
+from app.configs.db.mysql.mysql_config import Base, engine
+from app.domain.admin.delivery.router import user_router
 
 def create_tables():
     """
@@ -17,7 +14,6 @@ def create_tables():
         print("✅ Database tables created successfully.")
     except Exception as e:
         print("❌ Error creating tables:", str(e))
-
 
 def get_application() -> FastAPI:
     """
@@ -32,7 +28,7 @@ def get_application() -> FastAPI:
     # Middleware: CORS
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],  # Ganti dengan origin spesifik jika diperlukan
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -43,12 +39,10 @@ def get_application() -> FastAPI:
 
     return app
 
-
 # ----- Entrypoint -----
 create_tables()
 app = get_application()
 
-# Jalankan jika file ini dipanggil langsung
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

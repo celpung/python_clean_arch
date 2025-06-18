@@ -2,12 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
-from domain.mapper.user_mapper import to_response
-from domain.delivery.interface.user_delivery import UserDeliveryInterface
-from domain.delivery.dto.user_dto import CreateUserRequest, UpdateUserRequest, UserResponse, LoginRequest
-from domain.entity.user_entity import UserEntity
-from domain.delivery.dependency.user_dependency import get_user_usecase
-from domain.usecase.impl.user_usecase_impl import UserUseCaseImpl
+from app.domain.admin.delivery.dependency.user_dependency import get_user_usecase
+from app.domain.admin.delivery.dto.user_dto import UserResponse, CreateUserRequest, UpdateUserRequest, LoginRequest
+from app.domain.admin.delivery.interface.user_delivery import UserDeliveryInterface
+from app.domain.admin.entity.user_entity import UserEntity
+from app.domain.admin.mapper.user_mapper import to_response
+from app.domain.admin.usecase.impl.user_usecase_impl import UserUseCaseImpl
+
 
 class UserDeliveryImplementation(UserDeliveryInterface):
     def __init__(self):

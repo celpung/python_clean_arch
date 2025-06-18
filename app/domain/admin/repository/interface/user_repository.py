@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List
-from domain.entity.user_entity import UserEntity
+
+from app.domain.admin.entity.user_entity import UserEntity
+
 
 class UserRepositoryInterface(ABC):
     @abstractmethod

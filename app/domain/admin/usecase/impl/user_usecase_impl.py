@@ -1,10 +1,12 @@
+from abc import ABC
 from typing import List, Optional
-from domain.entity.user_entity import UserEntity
-from domain.repository.interface.user_repository import UserRepositoryInterface
-from domain.usecase.interface.user_usecase import UserUseCaseInterface
-from utils.password.hash_password import hash_password
-from utils.password.verify_password import verify_password
-from utils.jwt.jwt import create_access_token
+
+from app.domain.admin.entity.user_entity import UserEntity
+from app.domain.admin.repository.interface.user_repository import UserRepositoryInterface
+from app.domain.admin.usecase.interface.user_usecase import UserUseCaseInterface
+from app.utils.jwt.jwt import create_access_token
+from app.utils.password.hash_password import hash_password
+from app.utils.password.verify_password import verify_password
 
 class UserUseCaseImpl(UserUseCaseInterface):
     def __init__(self, user_repository: UserRepositoryInterface):
@@ -16,7 +18,7 @@ class UserUseCaseImpl(UserUseCaseInterface):
 
     def get_user_by_id(self, user_id: int) -> Optional[UserEntity]:
         return self.user_repository.get_by_id(user_id)
-    
+
     def get_user_by_email(self, email: str) -> Optional[UserEntity]:
         return self.user_repository.get_by_email(email)
 
@@ -28,14 +30,14 @@ class UserUseCaseImpl(UserUseCaseInterface):
 
     def delete_user(self, user_id: int) -> bool:
         return self.user_repository.delete(user_id)
-    
+
     def login(self, email: str, password: str) -> Optional[str]:
         usr = self.get_user_by_email(email)
         if not usr:
             return None
         if not verify_password(password, usr.password):
             return None
-        # need to generate jwt token
+        
         token = create_access_token({"sub": usr.id, "email": usr.email})
         return token
 

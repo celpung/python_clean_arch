@@ -8,5 +8,7 @@ class UserEntity:
     name: str = ""
     email: str = ""
     password: str = ""
+    role: int = 1
+    active: bool = False
     created_at: datetime = field(default_factory=datetime.utcnow)
     updated_at: datetime = field(default_factory=datetime.utcnow)

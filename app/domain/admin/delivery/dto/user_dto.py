@@ -11,11 +11,15 @@ class UpdateUserRequest(BaseModel):
     name: Optional[str]
     email: Optional[EmailStr]
     password: Optional[str]
+    role: Optional[int]
+    active: Optional[bool]
 
 class UserResponse(BaseModel):
     id: int
     name: str
     email: str
+    role: int
+    active: bool
     created_at: datetime
     updated_at: datetime
 

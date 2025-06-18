@@ -1,9 +1,11 @@
 from sqlalchemy.orm import Session
 from typing import Optional, List
-from domain.entity.user_entity import UserEntity
-from domain.repository.impl.user_model import UserModel
-from domain.repository.interface.user_repository import UserRepositoryInterface
-from domain.mapper.user_mapper import to_entity, to_model, to_response
+
+from app.domain.admin.entity.user_entity import UserEntity
+from app.domain.admin.mapper.user_mapper import to_model, to_entity
+from app.domain.admin.repository.impl.user_model import UserModel
+from app.domain.admin.repository.interface.user_repository import UserRepositoryInterface
+
 
 class UserRepositoryImpl(UserRepositoryInterface):
     def __init__(self, db: Session):
